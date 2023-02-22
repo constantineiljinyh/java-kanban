@@ -1,4 +1,4 @@
-package TuskFinal;
+package model;
 
 public enum Status {
     NEW,

@@ -1,4 +1,11 @@
-package TuskFinal;
+package service;
+
+
+
+import model.Epic;
+import model.Status;
+import model.SubTask;
+import model.Task;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -19,6 +26,7 @@ public class Manager {
     public int createEpic(Epic epic) {//2.4
         epic.setId(generatedId++);
         epics.put(epic.getId(), epic);
+        epic.setStatus(Status.NEW);
         return epic.getId();
     }
 
@@ -32,7 +40,7 @@ public class Manager {
         } else {
             System.out.println("ошибка");
         }
-        return subTask.getId();// пересчитать статус эпика         // добавить подзадачу в список эпика
+        return subTask.getId();
     }
 
     public void deleteTask(int id) {//2.6
@@ -48,10 +56,7 @@ public class Manager {
     }
 
     public void deleteSubTask(int id) {//2.6
-        SubTask subTask = subTasks.get(id);
-        epics.get(subTask.getEpicId()).getSubTaskID().remove(id);
-        subTasks.remove(id);
-        updateEpicStatus(epics.get(subTask.getEpicId()));
+       subTasks.remove(id);
     }
 
     public Task getTask(int id) {//2.3
@@ -69,23 +74,25 @@ public class Manager {
     }
 
     public void updateTask(Task task) {//2.5
-        if (tasks.containsKey(task.id)) {
+        if (tasks.containsKey(task.getId())) {
             tasks.put(task.getId(), task);
         } else {
-            System.out.println("ошибка");
+           System.out.println("ошибка");
         }
     }
 
     public void updateEpic(Epic epic) {//2.5
-        if (epics.containsKey(epic.id)) {
-            epics.put(epic.getId(), epic);
+        if (epics.containsKey(epic.getId())) {
+            epic.setStatus(epics.get(epic.getId()).getStatus());
+            epics.put(epic.getId(),epic);
         } else {
             System.out.println("ошибка");
         }
     }
 
+
     public void updateSubTask(SubTask subTask) {//2.5
-        if (subTasks.containsKey(subTask.id)) {
+        if (subTasks.containsKey(subTask.getId())) {
             subTasks.put(subTask.getId(), subTask);
             updateEpicStatus(epics.get(subTask.getEpicId()));
         } else {
@@ -126,7 +133,7 @@ public class Manager {
         subTasks.clear();
     }
 
-    public ArrayList<SubTask> getSubtasksByEpicId(Epic epic) {//3.1
+    public ArrayList<SubTask> getSubTaskSpecificEpic(Epic epic) {//3.1
         ArrayList<SubTask> tool = new ArrayList<>();
         for (Integer epics : subTasks.keySet()) {
             for (Integer epicId : epic.getSubTaskID())
@@ -144,11 +151,11 @@ public class Manager {
             } else {
                 int Done = 0;
                 int New = 0;
-                for (int i = 1; i < epic.getSubTaskID().size(); i++) {
-                    if (subTasks.get(epic.getSubTaskID().get(i)).status.equals(Status.DONE)) {
+                for (int i = 0; i < epic.getSubTaskID().size(); i++) {
+                    if (subTasks.get(epic.getSubTaskID().get(i)).getStatus().equals(Status.DONE)) {
                         Done++;
                     }
-                    if (subTasks.get(epic.getSubTaskID().get(i)).status.equals(Status.NEW)) {
+                    if (subTasks.get(epic.getSubTaskID().get(i)).getStatus().equals(Status.NEW)) {
                         New++;
                     }
                     if (Done == epic.getSubTaskID().size()) {
@@ -165,5 +172,6 @@ public class Manager {
         } else {
             System.out.println("ошибка");
         }
+
     }
 }
