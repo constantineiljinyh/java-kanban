@@ -4,8 +4,18 @@ import java.util.ArrayList;
 import java.util.Objects;
 
 public class Epic extends Task {
-    private ArrayList<Integer> subTaskID;
-    Status status;
+    private final ArrayList<Integer> subTaskID = new ArrayList<>();
+
+    public Epic(String name, String description) {
+        super(name, description);
+    }
+
+    public Epic(String name, String description, int id) {
+        super(name, description);
+        status = getStatus();
+        this.id = id;
+    }
+
     public ArrayList<Integer> getSubTaskID() {
 
         return subTaskID;
@@ -21,21 +31,8 @@ public class Epic extends Task {
         this.status = status;
     }
 
-    public Epic(String name, String description,int id ) {
-        super(name, description );
-        status = getStatus();
-        this.id = id;
-    }
-    public Epic(String name, String description ) {
-        super(name, description );
-        this.subTaskID = new ArrayList<>();
-    }
-
-
     public void setSubTaskID(Integer subTaskID) {
-
         this.subTaskID.add(subTaskID);
-
     }
 
     @Override

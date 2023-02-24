@@ -1,7 +1,6 @@
 package service;
 
 
-
 import model.Epic;
 import model.Status;
 import model.SubTask;
@@ -9,6 +8,7 @@ import model.Task;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
 public class Manager {
     HashMap<Integer, Task> tasks = new HashMap<>();
@@ -56,8 +56,13 @@ public class Manager {
     }
 
     public void deleteSubTask(int id) {//2.6
-       subTasks.remove(id);
+        int idEpic = subTasks.get(id).getEpicId();
+        int idSubTask = epics.get(idEpic).getSubTaskID().indexOf(id);
+        epics.get(idEpic).getSubTaskID().remove(idSubTask);
+        subTasks.remove(id);
+        updateEpicStatus(epics.get(idEpic));
     }
+
 
     public Task getTask(int id) {//2.3
 
@@ -77,14 +82,18 @@ public class Manager {
         if (tasks.containsKey(task.getId())) {
             tasks.put(task.getId(), task);
         } else {
-           System.out.println("ошибка");
+            System.out.println("ошибка");
         }
     }
 
     public void updateEpic(Epic epic) {//2.5
         if (epics.containsKey(epic.getId())) {
-            epic.setStatus(epics.get(epic.getId()).getStatus());
-            epics.put(epic.getId(),epic);
+            Epic oldEpic = epics.get(epic.getId());
+            for (int idSub : oldEpic.getSubTaskID()) {
+                epic.setSubTaskID(idSub);
+            }
+            epic.setStatus(oldEpic.getStatus());
+            epics.put(epic.getId(), epic);
         } else {
             System.out.println("ошибка");
         }
@@ -94,7 +103,9 @@ public class Manager {
     public void updateSubTask(SubTask subTask) {//2.5
         if (subTasks.containsKey(subTask.getId())) {
             subTasks.put(subTask.getId(), subTask);
-            updateEpicStatus(epics.get(subTask.getEpicId()));
+            Epic epic = epics.get(subTask.getEpicId());
+            epic.setSubTaskID(subTask.getId());
+            updateEpicStatus(epic);
         } else {
             System.out.println("ошибка");
         }

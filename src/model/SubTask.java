@@ -5,22 +5,20 @@ import java.util.Objects;
 public class SubTask extends Task {
     private int epicId;
 
-
-    public int getEpicId() {
-        return epicId ;
-    }
-
     public SubTask(String name, String description, Status status, int subEpicId) {
         super(name, description, status);
         this.epicId = subEpicId;
         this.id = getId();
-
     }
-    public SubTask(String name, String description, Status status, int subEpicId,int subId) {
+
+    public SubTask(String name, String description, Status status, int subEpicId, int subId) {
         super(name, description, status);
         this.epicId = subEpicId;
         this.id = subId;
+    }
 
+    public int getEpicId() {
+        return epicId;
     }
 
     @Override
