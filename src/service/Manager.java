@@ -63,7 +63,6 @@ public class Manager {
         updateEpicStatus(epics.get(idEpic));
     }
 
-
     public Task getTask(int id) {//2.3
 
         return tasks.get(id);
@@ -98,7 +97,6 @@ public class Manager {
             System.out.println("ошибка");
         }
     }
-
 
     public void updateSubTask(SubTask subTask) {//2.5
         if (subTasks.containsKey(subTask.getId())) {
