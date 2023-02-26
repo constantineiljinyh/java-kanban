@@ -20,7 +20,7 @@ public class Main {
         SubTask subTask3 = new SubTask("Собраться", "собрать чемодан", Status.NEW, 2);
 
         Epic epic3 = new Epic("Кино", "идем в кино в воскресенье", 1);
-        Epic epic4 = new Epic("Поездка", "Собраться", 1);
+        Epic epic4 = new Epic("Поездка", "Собраться", 2);
         SubTask subTask4 = new SubTask("кино", "выбрать кино", Status.DONE, 1, 3);
         SubTask subTask5 = new SubTask("билеты", "купить билеты", Status.DONE, 1, 4);
         SubTask subTask6 = new SubTask("Собраться", "собрать чемодан", Status.DONE, 2, 5);
@@ -34,6 +34,9 @@ public class Main {
 //        manager.createSubTask(subTask3);
 //        System.out.println(manager.epicList());
 //        manager.updateEpic(epic4);
+//        manager.updateSubTask(subTask4);
+//        manager.updateSubTask(subTask5);
+//        manager.updateSubTask(subTask6);
 //        System.out.println(manager.getEpic(1));
 //        manager.deleteSubTask(2);
 //        System.out.println(manager.getEpic(1));
@@ -42,7 +45,6 @@ public class Main {
             int i = scanner.nextInt();
             switch (i) {
                 case 1:
-
                     manager.createEpic(epic1);
                     manager.createEpic(epic2);
                     manager.createSubTask(subTask1);
@@ -55,7 +57,6 @@ public class Main {
                     System.out.println(manager.subTasksList());
                     break;
                 case 3:
-
                     manager.updateSubTask(subTask4);
                     manager.updateSubTask(subTask5);
                     manager.updateSubTask(subTask6);
@@ -63,9 +64,9 @@ public class Main {
                     manager.updateEpic(epic4);
                     break;
                 case 4:
-                   // manager.deleteTask(1);
-                   // manager.deleteEpic(3);
-                   // manager.deleteSubTask(5);
+                    // manager.deleteTask(1);
+                    manager.deleteEpic(2);
+                    manager.deleteSubTask(3);
 
                     //manager.deleteAllSubTasks();
                     break;

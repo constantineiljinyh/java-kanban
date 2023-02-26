@@ -102,7 +102,6 @@ public class Manager {
         if (subTasks.containsKey(subTask.getId())) {
             subTasks.put(subTask.getId(), subTask);
             Epic epic = epics.get(subTask.getEpicId());
-            epic.setSubTaskID(subTask.getId());
             updateEpicStatus(epic);
         } else {
             System.out.println("ошибка");
