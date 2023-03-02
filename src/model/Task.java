@@ -26,6 +26,18 @@ public class Task {
         this.description = description;
     }
 
+    public Task(String name) {
+        this.name = name;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
     public Status getStatus() {
         return status;
     }
