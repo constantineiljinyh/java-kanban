@@ -3,7 +3,7 @@ import model.Status;
 import model.SubTask;
 import model.Task;
 import service.Managers;
-import model.TaskManager;
+import service.TaskManager;
 import java.util.Scanner;
 
 public class Main {
@@ -67,7 +67,7 @@ public class Main {
                     break;
                 case 4:
                     // manager.deleteTask(1);
-                    manager.getEpic(1);
+                    System.out.println(manager.getEpic(1));
                     manager.getEpic(2);
                     manager.getSubTask(3);
                     manager.getSubTask(4);
@@ -76,7 +76,7 @@ public class Main {
                     //manager.deleteAllSubTasks();
                     break;
                 case 5:
-                    System.out.println(manager.getHistory());
+                    System.out.println(manager.getHistoryTasks());
                     break;
             }
         }

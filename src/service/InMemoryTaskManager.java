@@ -19,8 +19,8 @@ public class InMemoryTaskManager implements TaskManager {
     }
 
     @Override
-    public List<Task> getHistory() {
-        return historyManager.getHistory();
+    public List<Task> getHistoryTasks() {
+        return historyManager.getHistoryTasks();
     }
 
     @Override
@@ -77,21 +77,21 @@ public class InMemoryTaskManager implements TaskManager {
     }
 
     @Override
-    public void getTask(int id) {//2.3
-        System.out.println(tasks.get(id));
+    public Task getTask(int id) {//2.3
         historyManager.addTask(tasks.get(id));
+        return tasks.get(id);
     }
 
     @Override
-    public void getEpic(int id) {//2.3
-        System.out.println(epics.get(id));
+    public Epic getEpic(int id) {//2.3
         historyManager.addEpic(epics.get(id));
+        return epics.get(id);
     }
 
     @Override
-    public void getSubTask(int id) {//2.3
-        System.out.println(subTasks.get(id));
+    public SubTask getSubTask(int id) {//2.3
         historyManager.addSubtask(subTasks.get(id));
+        return subTasks.get(id);
     }
 
     @Override

@@ -1,7 +1,6 @@
 package service;
 
 import model.Epic;
-import model.HistoryManager;
 import model.SubTask;
 import model.Task;
 import java.util.ArrayList;
@@ -35,7 +34,7 @@ public class InMemoryHistoryManager implements HistoryManager {
     }
 
     @Override
-    public List<Task> getHistory() {
+    public List<Task> getHistoryTasks() {
         return historyManager;
     }
 }

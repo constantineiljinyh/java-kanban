@@ -1,4 +1,4 @@
-package model;
+package service;
 
 import model.Epic;
 import model.SubTask;
@@ -13,5 +13,5 @@ public interface HistoryManager {
 
     void addSubtask(SubTask subtask);
 
-    List<Task> getHistory();
+    List<Task> getHistoryTasks();
 }

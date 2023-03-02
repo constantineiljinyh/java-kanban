@@ -1,4 +1,4 @@
-package model;
+package service;
 
 import model.Epic;
 import model.SubTask;
@@ -8,7 +8,7 @@ import java.util.List;
 
 public interface TaskManager {
 
-    List<Task> getHistory();
+    List<Task> getHistoryTasks();
 
     int createTask(Task task);
 
@@ -22,11 +22,11 @@ public interface TaskManager {
 
     void deleteSubTask(int id);
 
-    void getTask(int id);
+    Task getTask(int id);
 
-    void getEpic(int id);
+    Epic getEpic(int id);
 
-    void getSubTask(int id);
+    SubTask getSubTask(int id);
 
     void updateTask(Task task);
 
