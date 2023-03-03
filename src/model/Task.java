@@ -14,20 +14,22 @@ public class Task {
         this.status = status;
     }
 
-    public Task(String name, String description, int id, Status status) {
+    public Task(String name, String description, Status status, int id) {
         this.name = name;
         this.description = description;
         this.status = status;
         this.id = id;
     }
 
+    public Task(String name, String description, int id) {
+        this.name = name;
+        this.description = description;
+        this.id = id;
+    }
+
     public Task(String name, String description) {
         this.name = name;
         this.description = description;
-    }
-
-    public Task(String name) {
-        this.name = name;
     }
 
     public String getDescription() {
