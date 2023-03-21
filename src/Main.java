@@ -18,7 +18,7 @@ public class Main {
 
         SubTask subTask1 = new SubTask("кино", "выбрать кино", Status.NEW, 1);
         SubTask subTask2 = new SubTask("билеты", "купить билеты", Status.NEW, 1);
-        SubTask subTask3 = new SubTask("Собраться", "собрать чемодан", Status.NEW, 2);
+        SubTask subTask3 = new SubTask("Собраться", "собрать чемодан", Status.NEW, 1);
 
         Epic epic3 = new Epic("ggg", "идем в кино в воскресенье", 1);
         Epic epic4 = new Epic("tttt", "Собраться", 2);
@@ -26,23 +26,7 @@ public class Main {
         SubTask subTask5 = new SubTask("билеты", "купить билеты", Status.DONE, 4, 1);
         SubTask subTask6 = new SubTask("Собраться", "собрать чемодан", Status.DONE, 5, 2);
         Task task = new Task("111", "222", Status.NEW);
-//        manager.createTask(task);
-//        manager.getTask(1);
-//        manager.createEpic(epic1);
-//        System.out.println(manager.getEpic(1));
-//        manager.updateEpic(epic3);
-//        System.out.println(manager.getEpic(1));
-//        manager.createSubTask(subTask1);
-//        manager.createSubTask(subTask2);
-//        manager.createSubTask(subTask3);
-//        System.out.println(manager.epicList());
-//        manager.updateEpic(epic4);
-//        manager.updateSubTask(subTask4);
-//        manager.updateSubTask(subTask5);
-//        manager.updateSubTask(subTask6);
-//        System.out.println(manager.getEpic(1));
-//        manager.deleteSubTask(2);
-//        System.out.println(manager.getEpic(1));
+
         while (true) {
 
             int i = scanner.nextInt();
@@ -55,16 +39,19 @@ public class Main {
                     manager.createSubTask(subTask3);
                     break;
                 case 2:
-                    manager.taskList();
-                    manager.epicList();
-                    manager.subTasksList();
+                    System.out.println(manager.getEpic(2));
+                    manager.getEpic(1);
+                    manager.getSubTask(5);
+                    manager.getSubTask(4);
+                    manager.getSubTask(3);
                     break;
                 case 3:
-                    manager.updateSubTask(subTask4);
-                    manager.updateSubTask(subTask5);
-                    manager.updateSubTask(subTask6);
-                    manager.updateEpic(epic3);
-                    manager.updateEpic(epic4);
+                    manager.deleteEpic(2);
+                    manager.deleteSubTask(3);
+//                    manager.updateSubTask(subTask5);
+//                    manager.updateSubTask(subTask6);
+//                    manager.updateEpic(epic3);
+//                    manager.updateEpic(epic4);
                     break;
                 case 4:
                     // manager.deleteTask(1);
@@ -78,6 +65,9 @@ public class Main {
                     break;
                 case 5:
                     System.out.println(manager.getHistoryTasks());
+                    break;
+                case 6:
+                    manager.deleteEpic(1);
                     break;
             }
         }
