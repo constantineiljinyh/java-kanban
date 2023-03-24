@@ -10,6 +10,7 @@ import java.util.Scanner;
 public class Main {
 
     public static void main(String[] args) {
+
         TaskManager manager = Managers.getDefault();
         Scanner scanner = new Scanner(System.in);
 
@@ -24,7 +25,7 @@ public class Main {
         Epic epic4 = new Epic("tttt", "Собраться", 2);
         SubTask subTask4 = new SubTask("кино", "выбрать кино", Status.DONE, 3, 1);
         SubTask subTask5 = new SubTask("билеты", "купить билеты", Status.DONE, 4, 1);
-        SubTask subTask6 = new SubTask("Собраться", "собрать чемодан", Status.DONE, 5, 2);
+        SubTask subTask6 = new SubTask("Собраться", "собрать чемодан", Status.DONE, 5, 1);
         Task task = new Task("111", "222", Status.NEW);
 
         while (true) {
@@ -46,10 +47,11 @@ public class Main {
                     manager.getSubTask(3);
                     break;
                 case 3:
-                    manager.deleteEpic(2);
+//                    manager.deleteEpic(2);
                     manager.deleteSubTask(3);
 //                    manager.updateSubTask(subTask5);
 //                    manager.updateSubTask(subTask6);
+
 //                    manager.updateEpic(epic3);
 //                    manager.updateEpic(epic4);
                     break;
@@ -61,13 +63,13 @@ public class Main {
                     manager.getSubTask(4);
                     manager.getSubTask(5);
 
-                    //manager.deleteAllSubTasks();
+//                    manager.deleteAllSubTasks();
                     break;
                 case 5:
                     System.out.println(manager.getHistoryTasks());
                     break;
                 case 6:
-                    manager.deleteEpic(1);
+                    System.out.println(manager.getSubTasksList());
                     break;
             }
         }

@@ -1,9 +1,6 @@
 package service;
 
-import model.Epic;
-import model.SubTask;
 import model.Task;
-
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -11,15 +8,14 @@ import java.util.Map;
 
 public class InMemoryHistoryManager implements HistoryManager {
 
-    private Map<Integer, Node> nodeMap = new HashMap<>();
+    private final Map<Integer, Node> nodeMap = new HashMap<>();
     private Node first;
     private Node last;
 
     @Override
     public void add(Task task) {
         removeNode(task.getId());
-        Node newNode = linkLast(task);
-        nodeMap.put(task.getId(), newNode);
+        nodeMap.put(task.getId(), linkLast(task));
     }
 
     @Override
@@ -52,10 +48,10 @@ public class InMemoryHistoryManager implements HistoryManager {
 
     public ArrayList<Task> getTasks() {
         ArrayList<Task> taskList = new ArrayList<>();
-        Node currentNode = first;
-        while (currentNode != null) {
-            taskList.add(currentNode.task);
-            currentNode = currentNode.next;
+        Node node = first;
+        while (node != null) {
+            taskList.add(node.task);
+            node = node.next;
         }
         return taskList;
     }
@@ -69,21 +65,6 @@ public class InMemoryHistoryManager implements HistoryManager {
         }
         last = node;
         return node;
-    }
-
-    @Override
-    public void addTask(Task task) {
-        add(task);
-    }
-
-    @Override
-    public void addEpic(Epic epic) {
-        add(epic);
-    }
-
-    @Override
-    public void addSubtask(SubTask subtask) {
-        add(subtask);
     }
 
     @Override
