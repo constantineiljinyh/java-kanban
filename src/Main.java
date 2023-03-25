@@ -28,6 +28,18 @@ public class Main {
         SubTask subTask6 = new SubTask("Собраться", "собрать чемодан", Status.DONE, 5, 1);
         Task task = new Task("111", "222", Status.NEW);
 
+//        manager.createEpic(epic1);
+//        manager.createSubTask(subTask1);
+//        manager.createSubTask(subTask2);
+//        //вывожу эпик
+//        System.out.println(manager.getEpic(1));
+//        //удаляю все подзадачи
+//        manager.deleteAllSubTasks();
+//        System.out.println(manager.getEpic(1));
+//        //удаляю все эпики
+//        manager.deleteAllEpic();
+//        System.out.println(manager.getEpic(1));
+
         while (true) {
 
             int i = scanner.nextInt();
@@ -47,13 +59,12 @@ public class Main {
                     manager.getSubTask(3);
                     break;
                 case 3:
-//                    manager.deleteEpic(2);
-                    manager.deleteSubTask(3);
-//                    manager.updateSubTask(subTask5);
-//                    manager.updateSubTask(subTask6);
-
-//                    manager.updateEpic(epic3);
-//                    manager.updateEpic(epic4);
+                    manager.deleteAllSubTasks();
+//                  manager.deleteSubTask(3);
+//                  manager.updateSubTask(subTask5);
+//                  manager.updateSubTask(subTask6);
+//                  manager.updateEpic(epic3);
+//                  manager.updateEpic(epic4);
                     break;
                 case 4:
                     // manager.deleteTask(1);
@@ -63,7 +74,7 @@ public class Main {
                     manager.getSubTask(4);
                     manager.getSubTask(5);
 
-//                    manager.deleteAllSubTasks();
+//                  manager.deleteAllSubTasks();
                     break;
                 case 5:
                     System.out.println(manager.getHistoryTasks());

@@ -1,6 +1,7 @@
 package service;
 
 import model.Task;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -14,6 +15,10 @@ public class InMemoryHistoryManager implements HistoryManager {
 
     @Override
     public void add(Task task) {
+        if (task == null) {
+            System.out.println("Такой задачи нет.");
+            return;
+        }
         removeNode(task.getId());
         nodeMap.put(task.getId(), linkLast(task));
     }
