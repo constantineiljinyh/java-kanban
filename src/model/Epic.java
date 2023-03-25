@@ -5,7 +5,7 @@ import java.util.Objects;
 
 public class Epic extends Task {
 
-    private final ArrayList<Integer> subTaskID = new ArrayList<>();
+    private final ArrayList<Integer> subTaskIdList = new ArrayList<>();
 
     public Epic(String name, String description) {
         super(name, description);
@@ -15,8 +15,8 @@ public class Epic extends Task {
         super(name, description, id);
     }
 
-    public ArrayList<Integer> getSubTaskID() {
-        return subTaskID;
+    public ArrayList<Integer> getSubTaskIdList() {
+        return subTaskIdList;
     }
 
     @Override
@@ -29,8 +29,8 @@ public class Epic extends Task {
         this.status = status;
     }
 
-    public void setSubTaskID(Integer subTaskID) {
-        this.subTaskID.add(subTaskID);
+    public void setSubTaskIdList(Integer subTaskId) {
+        this.subTaskIdList.add(subTaskId);
     }
 
     @Override
@@ -39,18 +39,18 @@ public class Epic extends Task {
         if (o == null || getClass() != o.getClass()) return false;
         if (!super.equals(o)) return false;
         Epic epic = (Epic) o;
-        return subTaskID.equals(epic.subTaskID);
+        return subTaskIdList.equals(epic.subTaskIdList);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(super.hashCode(), subTaskID);
+        return Objects.hash(super.hashCode(), subTaskIdList);
     }
 
     @Override
     public String toString() {
         return "Epic{" +
-                "subTaskID=" + subTaskID +
+                "subTaskId=" + subTaskIdList +
                 ", name='" + name + '\'' +
                 ", description='" + description + '\'' +
                 ", id=" + id +
