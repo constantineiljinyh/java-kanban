@@ -5,11 +5,12 @@ import model.Task;
 import service.Managers;
 import service.TaskManager;
 
+import java.io.IOException;
 import java.util.Scanner;
 
 public class Main {
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException {
 
         TaskManager manager = Managers.getDefault();
         Scanner scanner = new Scanner(System.in);
@@ -28,17 +29,6 @@ public class Main {
         SubTask subTask6 = new SubTask("Собраться", "собрать чемодан", Status.DONE, 5, 1);
         Task task = new Task("111", "222", Status.NEW);
 
-//        manager.createEpic(epic1);
-//        manager.createSubTask(subTask1);
-//        manager.createSubTask(subTask2);
-//        //вывожу эпик
-//        System.out.println(manager.getEpic(1));
-//        //удаляю все подзадачи
-//        manager.deleteAllSubTasks();
-//        System.out.println(manager.getEpic(1));
-//        //удаляю все эпики
-//        manager.deleteAllEpic();
-//        System.out.println(manager.getEpic(1));
 
         while (true) {
 
@@ -59,7 +49,7 @@ public class Main {
                     manager.getSubTask(3);
                     break;
                 case 3:
-                    manager.deleteAllSubTasks();
+                    manager.getSubTasksList();
 //                  manager.deleteSubTask(3);
 //                  manager.updateSubTask(subTask5);
 //                  manager.updateSubTask(subTask6);
@@ -80,7 +70,7 @@ public class Main {
                     System.out.println(manager.getHistoryTasks());
                     break;
                 case 6:
-                    System.out.println(manager.getSubTasksList());
+             //       manager.loadFromFile("File/history.csv");
                     break;
             }
         }

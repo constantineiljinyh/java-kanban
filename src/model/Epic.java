@@ -15,6 +15,10 @@ public class Epic extends Task {
         super(name, description, id);
     }
 
+    public Epic(int id, TaskType taskType, String name, Status status, String description) {
+        super(id, taskType, name, status, description);
+    }
+
     public ArrayList<Integer> getSubTaskIdList() {
         return subTaskIdList;
     }
@@ -22,6 +26,14 @@ public class Epic extends Task {
     @Override
     public Status getStatus() {
         return status;
+    }
+
+    public Integer getEpicId() {
+        return null;
+    }
+    @Override
+    public TaskType getTaskType() {
+        return TaskType.EPIC;
     }
 
     @Override

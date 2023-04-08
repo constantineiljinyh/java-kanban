@@ -4,49 +4,51 @@ import model.Epic;
 import model.SubTask;
 import model.Task;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
 public interface TaskManager {
 
-    List<Task> getHistoryTasks();
+    List<Task> getHistoryTasks() throws IOException;
 
-    int createTask(Task task);
+    int createTask(Task task) throws IOException;
 
-    int createEpic(Epic epic);
+    int createEpic(Epic epic) throws IOException;
 
-    int createSubTask(SubTask subTask);
+    int createSubTask(SubTask subTask) throws IOException;
 
-    void deleteTask(int id);
+    void deleteTask(int id) throws IOException;
 
-    void deleteEpic(int id);
+    void deleteEpic(int id) throws IOException;
 
-    void deleteSubTask(int id);
+    void deleteSubTask(int id) throws IOException;
 
-    Task getTask(int id);
+    Task getTask(int id) throws IOException;
 
-    Epic getEpic(int id);
+    Epic getEpic(int id) throws IOException;
 
-    SubTask getSubTask(int id);
+    SubTask getSubTask(int id) throws IOException;
 
-    void updateTask(Task task);
+    void updateTask(Task task) throws IOException;
 
-    void updateEpic(Epic epic);
+    void updateEpic(Epic epic) throws IOException;
 
-    void updateSubTask(SubTask subTask);
+    void updateSubTask(SubTask subTask) throws IOException;
 
-    Collection<Task> getTaskList();
+    Collection<Task> getTaskList() throws IOException;
 
-    Collection<Epic> getEpicList();
+    Collection<Epic> getEpicList() throws IOException;
 
-    Collection<SubTask> getSubTasksList();
+    Collection<SubTask> getSubTasksList() throws IOException;
 
-    void deleteAllTasks();
+    void deleteAllTasks() throws IOException;
 
-    void deleteAllEpic();
+    void deleteAllEpic() throws IOException;
 
-    void deleteAllSubTasks();
+    void deleteAllSubTasks() throws IOException;
 
-    ArrayList<SubTask> getSubTasksForEpic(Epic epic);
+    ArrayList<SubTask> getSubTasksForEpic(Epic epic) throws IOException;
+
 }

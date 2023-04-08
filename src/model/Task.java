@@ -6,13 +6,24 @@ public class Task {
 
     protected String name;
     protected String description;
+
     protected int id;
     protected Status status;
+    protected TaskType taskType;
+
 
     public Task(String name, String description, Status status) {
         this.name = name;
         this.description = description;
         this.status = status;
+    }
+
+    public Task(int id, TaskType taskType, String name, Status status, String description) {
+        this.id = id;
+        this.taskType = taskType;
+        this.name = name;
+        this.status = status;
+        this.description = description;
     }
 
     public Task(String name, String description, Status status, int id) {
@@ -35,6 +46,18 @@ public class Task {
 
     public String getDescription() {
         return description;
+    }
+
+    public TaskType getTaskType() {
+        return TaskType.TASK;
+    }
+
+    public Integer getEpicId() {
+        return null;
+    }
+
+    public String getName() {
+        return name;
     }
 
     public void setDescription(String description) {
@@ -62,12 +85,12 @@ public class Task {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Task task = (Task) o;
-        return id == task.id && name.equals(task.name) && description.equals(task.description) && status == task.status;
+        return id == task.id && Objects.equals(name, task.name) && Objects.equals(description, task.description) && status == task.status && taskType == task.taskType;
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(name, description, id, status);
+        return Objects.hash(name, description, id, status, taskType);
     }
 
     @Override
@@ -76,7 +99,7 @@ public class Task {
                 "name='" + name + '\'' +
                 ", description='" + description + '\'' +
                 ", id=" + id +
-                ", status='" + status + '\'' +
+                ", status=" + status +
                 '}';
     }
 }
