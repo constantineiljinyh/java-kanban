@@ -6,11 +6,8 @@ public class Task {
 
     protected String name;
     protected String description;
-
     protected int id;
     protected Status status;
-    protected TaskType taskType;
-
 
     public Task(String name, String description, Status status) {
         this.name = name;
@@ -18,9 +15,8 @@ public class Task {
         this.status = status;
     }
 
-    public Task(int id, TaskType taskType, String name, Status status, String description) {
+    public Task(int id, String name, Status status, String description) {
         this.id = id;
-        this.taskType = taskType;
         this.name = name;
         this.status = status;
         this.description = description;
@@ -46,10 +42,6 @@ public class Task {
 
     public String getDescription() {
         return description;
-    }
-
-    public TaskType getTaskType() {
-        return TaskType.TASK;
     }
 
     public Integer getEpicId() {
@@ -85,12 +77,12 @@ public class Task {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Task task = (Task) o;
-        return id == task.id && Objects.equals(name, task.name) && Objects.equals(description, task.description) && status == task.status && taskType == task.taskType;
+        return id == task.id && Objects.equals(name, task.name) && Objects.equals(description, task.description) && status == task.status ;
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(name, description, id, status, taskType);
+        return Objects.hash(name, description, id, status);
     }
 
     @Override

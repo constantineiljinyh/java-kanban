@@ -1,10 +1,11 @@
-package service;
+package service.backedmanager;
 
 import model.Epic;
 import model.Status;
 import model.SubTask;
 import model.Task;
 import model.TaskType;
+import service.historymanager.HistoryManager;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -15,8 +16,17 @@ public class TaskManagerCSVFormatter {
     }
 
     public static String toString(Task task) {
+        String type = "";
+
+        if (task.getClass() == Task.class) {
+            type = "TASK";
+        } else if (task.getClass() == Epic.class) {
+            type = "EPIC";
+        } else if (task.getClass() == SubTask.class) {
+            type = "SUBTASK";
+        }
         return String.format("%d,%s,%s,%s,%s,%s",
-                task.getId(), task.getTaskType(), task.getName(), task.getStatus(),
+                task.getId(), type, task.getName(), task.getStatus(),
                 task.getDescription(), task.getEpicId());
     }
 
@@ -27,14 +37,14 @@ public class TaskManagerCSVFormatter {
         String name = parts[2];
         Status status = Status.valueOf(parts[3]);
         String description = parts[4];
-        if (!parts[5].equals("null") && !parts[5].isEmpty()) {
+        if (type.equals(TaskType.SUBTASK)){
             int epicId = Integer.parseInt(parts[5]);
-            return new SubTask(id, type, name, status, description, epicId);
+            return new SubTask(id, name, status, description, epicId);
         }
         if (type.equals(TaskType.TASK)) {
-            return new Task(id, type, name, status, description);
+            return new Task(id, name, status, description);
         } else {
-            return new Epic(id, type, name, status, description);
+            return new Epic(id, name, status, description);
         }
     }
 
@@ -53,6 +63,6 @@ public class TaskManagerCSVFormatter {
         for (String historyId : historyIds) {
             historyList.add(Integer.parseInt(historyId));
         }
-        return historyList;              // берем строку делим по запятым и сохраняем все id которые там были
+        return historyList;
     }
 }
