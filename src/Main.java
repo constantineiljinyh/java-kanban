@@ -70,7 +70,7 @@ public class Main {
                     System.out.println(manager.getHistoryTasks());
                     break;
                 case 6:
-             //       manager.loadFromFile("File/history.csv");
+
                     break;
             }
         }

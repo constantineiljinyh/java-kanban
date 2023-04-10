@@ -1,10 +1,11 @@
-package service.historymanager;
+package service.history_manager;
 
 import model.Task;
 
 import java.util.Objects;
 
 public class Node {
+
     Task task;
     Node prev;
     Node next;

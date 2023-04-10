@@ -1,7 +1,8 @@
 package service;
 
-import service.historymanager.HistoryManager;
-import service.historymanager.InMemoryHistoryManager;
+import service.history_manager.HistoryManager;
+import service.history_manager.InMemoryHistoryManager;
+import service.inmemory_taskmanager.InMemoryTaskManager;
 
 public class Managers {
 

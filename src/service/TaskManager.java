@@ -49,6 +49,6 @@ public interface TaskManager {
 
     void deleteAllSubTasks();
 
-    ArrayList<SubTask> getSubTasksForEpic(Epic epic);
+    Collection<SubTask> getSubTasksForEpic(Epic epic);
 
 }

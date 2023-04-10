@@ -1,0 +1,10 @@
+id,type,name,status,description,epic
+1,TASK,задача,NEW,описание,null
+2,TASK,задача2,NEW,описание2,null
+3,EPIC,Кино,NEW,идем в кино в воскресенье,null
+4,EPIC,Поездка,NEW,Собраться,null
+5,SUBTASK,кино,NEW,выбрать кино,3
+6,SUBTASK,билеты,NEW,купить билеты,3
+7,SUBTASK,Собраться,NEW,собрать чемодан,3
+
+3,4,1,2,

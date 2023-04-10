@@ -1,4 +1,4 @@
-package customexceptions;
+package custom_exceptions;
 
 public class ManagerSaveException extends RuntimeException {
 

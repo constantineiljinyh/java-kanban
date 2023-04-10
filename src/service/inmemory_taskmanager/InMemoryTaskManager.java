@@ -1,10 +1,12 @@
-package service;
+package service.inmemory_taskmanager;
 
 import model.Epic;
 import model.SubTask;
 import model.Status;
 import model.Task;
-import service.historymanager.HistoryManager;
+import service.Managers;
+import service.TaskManager;
+import service.history_manager.HistoryManager;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
@@ -192,7 +194,7 @@ public class InMemoryTaskManager implements TaskManager {
     }
 
     @Override
-    public ArrayList<SubTask> getSubTasksForEpic(Epic epic) {
+    public Collection<SubTask> getSubTasksForEpic(Epic epic) {
         ArrayList<SubTask> tool = new ArrayList<>();
         for (SubTask subTask : subTasks.values()) {
             if (epic.getSubTaskIdList().contains(subTask.getId())) {
