@@ -6,13 +6,14 @@ import model.SubTask;
 import model.Task;
 import model.TaskType;
 import service.history_manager.HistoryManager;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
 public class TaskManagerCSVFormatter {
 
     public static String getHeader() {
-        return "id,type,name,status,description,epic";
+        return "id,type,name,status,description,duration,start_time,end_time,epic";
     }
 
     public static String toString(Task task) {
@@ -25,9 +26,9 @@ public class TaskManagerCSVFormatter {
         } else if (task.getClass() == SubTask.class) {
             type = "SUBTASK";
         }
-        return String.format("%d,%s,%s,%s,%s,%s",
+        return String.format("%d,%s,%s,%s,%s,%d,%s,%s,%s",
                 task.getId(), type, task.getName(), task.getStatus(),
-                task.getDescription(), task.getEpicId());
+                task.getDescription(), task.getDuration(), task.getStartTime(), task.getEndTime(), task.getEpicId());
     }
 
     public static Task fromString(String value) {
@@ -37,14 +38,26 @@ public class TaskManagerCSVFormatter {
         String name = parts[2];
         Status status = Status.valueOf(parts[3]);
         String description = parts[4];
+        int duration = 0;
+        if (!parts[5].isEmpty()) {
+            duration = Integer.parseInt(parts[5]);
+        }
+        LocalDateTime startTime = null;
+        if (!parts[6].equals("null") && !parts[6].isEmpty()) {
+            startTime = LocalDateTime.parse(parts[6]);
+        }
+        LocalDateTime endTime = null;
+        if (!parts[7].equals("null") && !parts[7].isEmpty()) {
+            endTime = LocalDateTime.parse(parts[7]);
+        }
         if (type.equals(TaskType.SUBTASK)){
-            int epicId = Integer.parseInt(parts[5]);
-            return new SubTask(id, name, status, description, epicId);
+            int epicId = Integer.parseInt(parts[8]);
+            return new SubTask( id,  name,  status,  description,  duration,  startTime, endTime, epicId);
         }
         if (type.equals(TaskType.TASK)) {
-            return new Task(id, name, status, description);
+            return new Task(id, name, status, description, duration, startTime, endTime);
         } else {
-            return new Epic(id, name, status, description);
+            return new Epic(id, name, status, description, duration, startTime, endTime);
         }
     }
 
@@ -66,3 +79,4 @@ public class TaskManagerCSVFormatter {
         return historyList;
     }
 }
+

@@ -1,5 +1,6 @@
 package model;
 
+import java.time.LocalDateTime;
 import java.util.Objects;
 
 public class SubTask extends Task {
@@ -16,9 +17,14 @@ public class SubTask extends Task {
         this.epicId = subEpicId;
     }
 
-    public SubTask(int id,String name,Status status,String description,int epicId){
-        super(id,name,status,description);
-        this.epicId = epicId;
+    public SubTask( String name, String description, Status status, int duration, LocalDateTime startTime,int subEpicId){
+        super(name,description,status,duration,startTime);
+        this.epicId = subEpicId;
+    }
+
+    public SubTask(int id, String name, Status status, String description, int duration, LocalDateTime startTime,LocalDateTime endTime,int subEpicId){
+        super(id,name,status,description,duration,startTime,endTime);
+        this.epicId = subEpicId;
     }
 
     @Override
@@ -43,11 +49,14 @@ public class SubTask extends Task {
     @Override
     public String toString() {
         return "SubTask{" +
-                "subEpicId=" + epicId +
+                "epicId=" + epicId +
                 ", name='" + name + '\'' +
                 ", description='" + description + '\'' +
                 ", id=" + id +
-                ", status='" + status + '\'' +
+                ", status=" + status +
+                ", duration=" + duration +
+                ", startTime=" + startTime +
+                ", endTime=" + endTime +
                 '}';
     }
 }
