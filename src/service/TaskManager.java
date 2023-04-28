@@ -49,10 +49,19 @@ public interface TaskManager {
     void deleteAllSubTasks();
 
     Collection<SubTask> getSubTasksForEpic(Epic epic);
-    void updateEpicStatus(Epic epic);
+
+    private void updateEpicStatus(Epic epic) {
+
+    }
+
     TreeSet<Task> getPrioritizedTasks();
 
-    void updateDurationAndStartTimes(Epic epic);
-    void checkTaskOverlap(Task task);
+    private void updateDurationAndStartTimes(Epic epic) {
+
+    }
+
+    private void checkTaskOverlap(Task task) {
+
+    }
 }
 

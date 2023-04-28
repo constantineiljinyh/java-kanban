@@ -29,6 +29,7 @@ public class FileBackedTasksManager extends InMemoryTaskManager {
 
     public static FileBackedTasksManager loadFromFile(File file) throws ManagerSaveException {
         FileBackedTasksManager tasksManager = new FileBackedTasksManager();
+        int maxId = 0;
         try (BufferedReader reader = new BufferedReader(new FileReader(file))) {
             String[] lines = reader.lines().toArray(String[]::new);
 
@@ -42,8 +43,8 @@ public class FileBackedTasksManager extends InMemoryTaskManager {
                     break;
                 }
                 Task task = TaskManagerCSVFormatter.fromString(line);
-                if (task.getId() > id) {
-                    id = task.getId();
+                if (task.getId() > maxId) {
+                    maxId = task.getId();
                 }
                 if (task.getClass() == Task.class) {
                     tasksManager.tasks.put(task.getId(), task);
@@ -55,6 +56,7 @@ public class FileBackedTasksManager extends InMemoryTaskManager {
                     tasksManager.subTasks.put(task.getId(), (SubTask) task);
                 }
             }
+            id = maxId + 1;
             for (Map.Entry<Integer, SubTask> entry : tasksManager.subTasks.entrySet()) {
                 SubTask subTask = entry.getValue();
                 Epic epic = tasksManager.epics.get(subTask.getEpicId());

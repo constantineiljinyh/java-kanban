@@ -40,9 +40,7 @@ public abstract class TaskManagerTest<T extends TaskManager> {
         Epic epic = new Epic("Test Epic", "Test Description");
         epic.setId(1);
         manager.createEpic(epic);
-
-        manager.updateEpicStatus(epic);
-
+        manager.updateEpic(epic);
         assertEquals(Status.NEW, epic.getStatus());
     }
 
@@ -55,8 +53,6 @@ public abstract class TaskManagerTest<T extends TaskManager> {
         SubTask subTask2 = new SubTask("SubTask 2", "SubTask Description", Status.NEW, 12, LocalDateTime.of(2024, 10, 20, 12, 12), epic.getId());
         manager.createSubTask(subTask1);
         manager.createSubTask(subTask2);
-
-        manager.updateEpicStatus(epic);
 
         assertEquals(Status.NEW, epic.getStatus());
     }
@@ -71,8 +67,6 @@ public abstract class TaskManagerTest<T extends TaskManager> {
         manager.createSubTask(subTask1);
         manager.createSubTask(subTask2);
 
-        manager.updateEpicStatus(epic);
-
         assertEquals(Status.DONE, epic.getStatus());
     }
 
@@ -86,8 +80,6 @@ public abstract class TaskManagerTest<T extends TaskManager> {
         manager.createSubTask(subTask1);
         manager.createSubTask(subTask2);
 
-        manager.updateEpicStatus(epic);
-
         assertEquals(Status.IN_PROGRESS, epic.getStatus());
     }
 
@@ -100,8 +92,6 @@ public abstract class TaskManagerTest<T extends TaskManager> {
         SubTask subTask2 = new SubTask("SubTask 2", "SubTask Description", Status.DONE, 12, LocalDateTime.of(2024, 10, 20, 12, 12), epic.getId());
         manager.createSubTask(subTask1);
         manager.createSubTask(subTask2);
-
-        manager.updateEpicStatus(epic);
 
         assertEquals(Status.IN_PROGRESS, epic.getStatus());
     }
@@ -452,7 +442,6 @@ public abstract class TaskManagerTest<T extends TaskManager> {
     @Test
     public void testUpdateDurationAndStartTimesWithNoSubtasks() {
         manager.createEpic(epic1);
-        manager.updateDurationAndStartTimes(epic1);
 
         assertNull(epic1.getStartTime());
         assertNull(epic1.getEndTime());

@@ -5,6 +5,7 @@ import model.Task;
 import service.Managers;
 import service.TaskManager;
 
+import java.time.LocalDateTime;
 import java.util.Scanner;
 
 public class Main {
@@ -17,9 +18,9 @@ public class Main {
         Epic epic1 = new Epic("Кино", "идем в кино в воскресенье");
         Epic epic2 = new Epic("Поездка", "Собраться");
 
-        SubTask subTask1 = new SubTask("кино", "выбрать кино", Status.NEW, 1);
-        SubTask subTask2 = new SubTask("билеты", "купить билеты", Status.NEW, 1);
-        SubTask subTask3 = new SubTask("Собраться", "собрать чемодан", Status.NEW, 1);
+        SubTask subTask1 = new SubTask("SubTask 1", "SubTask Description", Status.IN_PROGRESS, 60, LocalDateTime.of(2023, 10, 20, 12, 0), 1);
+        SubTask subTask2 = new SubTask("SubTask 2", "SubTask Description", Status.IN_PROGRESS, 60, LocalDateTime.of(2023, 10, 20, 13, 10), 1);
+
 
         Epic epic3 = new Epic("ggg", "идем в кино в воскресенье", 1);
         Epic epic4 = new Epic("tttt", "Собраться", 2);
@@ -38,7 +39,7 @@ public class Main {
                     manager.createEpic(epic2);
                     manager.createSubTask(subTask1);
                     manager.createSubTask(subTask2);
-                    manager.createSubTask(subTask3);
+
                     break;
                 case 2:
                     System.out.println(manager.getEpic(2));
@@ -48,7 +49,7 @@ public class Main {
                     manager.getSubTask(3);
                     break;
                 case 3:
-                    manager.getSubTasksList();
+                    manager.deleteSubTask(3);
 //                  manager.deleteSubTask(3);
 //                  manager.updateSubTask(subTask5);
 //                  manager.updateSubTask(subTask6);
@@ -66,7 +67,7 @@ public class Main {
 //                  manager.deleteAllSubTasks();
                     break;
                 case 5:
-                    System.out.println(manager.getHistoryTasks());
+                    System.out.println(manager.getPrioritizedTasks());
                     break;
                 case 6:
 
