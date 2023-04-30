@@ -18,7 +18,11 @@ public class TaskManagerCSVFormatter {
 
     public static String toString(Task task) {
         String type = "";
+        String epicId = "";
 
+        if (task instanceof SubTask) {
+            epicId = String.valueOf(((SubTask) task).getEpicId());
+        }
         if (task.getClass() == Task.class) {
             type = "TASK";
         } else if (task.getClass() == Epic.class) {
@@ -28,7 +32,7 @@ public class TaskManagerCSVFormatter {
         }
         return String.format("%d,%s,%s,%s,%s,%d,%s,%s,%s",
                 task.getId(), type, task.getName(), task.getStatus(),
-                task.getDescription(), task.getDuration(), task.getStartTime(), task.getEndTime(), task.getEpicId());
+                task.getDescription(), task.getDuration(), task.getStartTime(), task.getEndTime(), epicId);
     }
 
     public static Task fromString(String value) {

@@ -5,6 +5,8 @@ import model.Epic;
 import model.Status;
 import model.SubTask;
 import model.Task;
+import service.Managers;
+import service.TaskManager;
 import service.inmemory_taskmanager.InMemoryTaskManager;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
@@ -37,8 +39,10 @@ public class FileBackedTasksManager extends InMemoryTaskManager {
 
             for (int i = 1; i < lines.length; i++) {
                 String line = lines[i];
-
                 if (line.isEmpty()) {
+                    if (i == lines.length - 1) {
+                        break;
+                    }
                     history = TaskManagerCSVFormatter.historyFromString(lines[i + 1]);
                     break;
                 }
@@ -223,7 +227,7 @@ public class FileBackedTasksManager extends InMemoryTaskManager {
     }
 
     @Override
-    public Collection<SubTask> getSubTasksForEpic(Epic epic) {
+    public Collection<SubTask> getSubTasks(Epic epic) {
         ArrayList<SubTask> tool = new ArrayList<>();
         for (SubTask subTask : subTasks.values()) {
             if (epic.getSubTaskIdList().contains(subTask.getId())) {
@@ -234,7 +238,6 @@ public class FileBackedTasksManager extends InMemoryTaskManager {
         return tool;
     }
 
-
     @Override
     public List<Task> getHistoryTasks() {
         return historyManager.getHistoryTasks();
@@ -242,7 +245,7 @@ public class FileBackedTasksManager extends InMemoryTaskManager {
 
     public static void main(String[] args)  {
 
-        FileBackedTasksManager tasksManager = new FileBackedTasksManager();
+        TaskManager tasksManager = Managers.getDefault();
 
         Epic epic1 = new Epic("Кино", "идем в кино в воскресенье");
         Epic epic2 = new Epic("Поездка", "Собраться");

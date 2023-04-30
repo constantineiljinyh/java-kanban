@@ -4,6 +4,7 @@ import model.Epic;
 import model.SubTask;
 import model.Task;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 import java.util.TreeSet;
@@ -48,20 +49,8 @@ public interface TaskManager {
 
     void deleteAllSubTasks();
 
-    Collection<SubTask> getSubTasksForEpic(Epic epic);
+    Collection<SubTask> getSubTasks(Epic epic);
 
-    private void updateEpicStatus(Epic epic) {
-
-    }
-
-    TreeSet<Task> getPrioritizedTasks();
-
-    private void updateDurationAndStartTimes(Epic epic) {
-
-    }
-
-    private void checkTaskOverlap(Task task) {
-
-    }
+    ArrayList<Task> getPrioritizedTasks();
 }
 

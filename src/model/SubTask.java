@@ -27,7 +27,6 @@ public class SubTask extends Task {
         this.epicId = subEpicId;
     }
 
-    @Override
     public Integer getEpicId() {
         return epicId;
     }

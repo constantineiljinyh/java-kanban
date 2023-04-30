@@ -60,9 +60,7 @@ public class Task {
         return description;
     }
 
-    public Integer getEpicId() {
-        return null;
-    }
+
 
     public String getName() {
         return name;
@@ -104,6 +102,9 @@ public class Task {
         this.duration = duration;
     }
 
+    public void setName(String name) {
+        this.name = name;
+    }
     public void setStartTime(LocalDateTime startTime) {
         this.startTime = startTime;
     }

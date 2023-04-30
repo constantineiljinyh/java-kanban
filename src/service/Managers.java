@@ -1,13 +1,14 @@
 package service;
 
+import service.backed_manager.FileBackedTasksManager;
 import service.history_manager.HistoryManager;
 import service.history_manager.InMemoryHistoryManager;
-import service.inmemory_taskmanager.InMemoryTaskManager;
+
 
 public class Managers {
 
     public static TaskManager getDefault() {
-        return new InMemoryTaskManager();
+        return new FileBackedTasksManager();
     }
 
     public static HistoryManager getDefaultHistory() {
