@@ -7,10 +7,9 @@ import service.TaskManagerTest;
 import java.io.File;
 import java.io.IOException;
 import static org.junit.jupiter.api.Assertions.*;
-import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class FileBackedTasksManagerTest extends TaskManagerTest<FileBackedTasksManager> {
-     File testFile;
+    File testFile;
     FileBackedTasksManager tasksManager;
     @BeforeEach
     public  void beforeEach() {

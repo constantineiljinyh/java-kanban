@@ -5,9 +5,9 @@ import model.Epic;
 import model.Status;
 import model.SubTask;
 import model.Task;
-import service.Managers;
 import service.TaskManager;
 import service.inmemory_taskmanager.InMemoryTaskManager;
+
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
@@ -25,10 +25,15 @@ public class FileBackedTasksManager extends InMemoryTaskManager {
 
     protected static File file;
 
+    protected String path;
+
     public FileBackedTasksManager() {
         this.file = new File("resources/history.csv");
     }
 
+    public FileBackedTasksManager(String path) {
+        this.path = path;
+    }
     public static FileBackedTasksManager loadFromFile(File file) throws ManagerSaveException {
         FileBackedTasksManager tasksManager = new FileBackedTasksManager();
         int maxId = 0;
@@ -245,17 +250,17 @@ public class FileBackedTasksManager extends InMemoryTaskManager {
 
     public static void main(String[] args)  {
 
-        TaskManager tasksManager = Managers.getDefault();
+        TaskManager tasksManager = new FileBackedTasksManager();
 
         Epic epic1 = new Epic("Кино", "идем в кино в воскресенье");
         Epic epic2 = new Epic("Поездка", "Собраться");
-        SubTask subTask1 = new SubTask("кино", "выбрать кино", Status.NEW,12, LocalDateTime.of(2021, 10, 20, 12, 12), 3);
-        SubTask subTask2 = new SubTask("билеты", "купить билеты", Status.NEW, 12, LocalDateTime.of(2022, 10, 20, 12, 12), 3);
-        SubTask subTask3 = new SubTask("Собраться", "собрать чемодан", Status.NEW, 12, LocalDateTime.of(2024, 10, 10, 12, 12), 3);
+        SubTask subTask1 = new SubTask("кино", "выбрать кино", Status.NEW, 300, LocalDateTime.of(2021, 10, 20, 12, 12), 3);
+        SubTask subTask2 = new SubTask("билеты", "купить билеты", Status.NEW, 300, LocalDateTime.of(2022, 10, 20, 12, 12), 3);
+        SubTask subTask3 = new SubTask("Собраться", "собрать чемодан", Status.NEW, 300, LocalDateTime.of(2024, 10, 10, 12, 12), 3);
         SubTask subTask4 = new SubTask("кино", "выбрать кино", Status.DONE, 6, 3);
         SubTask subTask5 = new SubTask("кино", "выбрать кино", Status.NEW, 3);
-        Task task1 = new Task("задача", "описание", Status.NEW,12, LocalDateTime.of(2026, 4, 20, 12, 12));
-        Task task2 = new Task("задача2", "описание2", Status.NEW,12, LocalDateTime.of(2025, 4, 20, 12, 12));
+        Task task1 = new Task("задача", "описание", Status.NEW,300, LocalDateTime.of(2026, 4, 20, 12, 12));
+        Task task2 = new Task("задача2", "описание2", Status.NEW,300, LocalDateTime.of(2025, 4, 20, 12, 12));
 
         tasksManager.createTask(task1);
         tasksManager.createTask(task2);

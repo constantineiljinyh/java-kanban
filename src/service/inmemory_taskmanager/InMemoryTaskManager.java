@@ -4,6 +4,7 @@ import model.Epic;
 import model.SubTask;
 import model.Status;
 import model.Task;
+import model.TaskType;
 import service.Managers;
 import service.TaskManager;
 import service.history_manager.HistoryManager;
@@ -14,6 +15,7 @@ import java.util.Collection;
 import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 import java.util.TreeSet;
 
@@ -40,6 +42,7 @@ public class InMemoryTaskManager implements TaskManager {
         task.setEndTime();
         checkTaskOverlap(task);
         task.setId(id++);
+        task.setType(TaskType.TASK);
         tasks.put(task.getId(), task);
         prioritizedTasks.add(task);
         return task.getId();
@@ -49,6 +52,7 @@ public class InMemoryTaskManager implements TaskManager {
     public int createEpic(Epic epic) {
         updateDurationAndStartTimes(epic);
         epic.setId(id++);
+        epic.setType(TaskType.EPIC);
         epics.put(epic.getId(), epic);
         epic.setStatus(Status.NEW);
         return epic.getId();
@@ -60,6 +64,7 @@ public class InMemoryTaskManager implements TaskManager {
             subTask.setEndTime();
             checkTaskOverlap(subTask);
             subTask.setId(id++);
+            subTask.setType(TaskType.SUBTASK);
             subTasks.put(subTask.getId(), subTask);
             prioritizedTasks.add(subTask);
             Epic epic = epics.get(subTask.getEpicId());
@@ -331,5 +336,18 @@ public class InMemoryTaskManager implements TaskManager {
             }
         }
     }
+
+    public Map<Integer, Task> getTasks() {
+        return tasks;
+    }
+
+    public Map<Integer, Epic> getEpics() {
+        return epics;
+    }
+
+    public Map<Integer, SubTask> getSubTasks() {
+        return subTasks;
+    }
+
 }
 

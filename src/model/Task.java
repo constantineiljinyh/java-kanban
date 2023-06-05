@@ -13,6 +13,7 @@ public class Task {
     protected int duration;
     protected LocalDateTime startTime;
     protected LocalDateTime endTime;
+    protected TaskType type;
 
     public Task(String name, String description, Status status) {
         this.name = name;
@@ -26,6 +27,14 @@ public class Task {
         this.description = description;
         this.duration = duration;
         this.startTime = startTime;
+    }
+
+    public Task(String name, String description, LocalDateTime startTime, int duration) {
+        this.type = TaskType.TASK;
+        this.name = name;
+        this.description = description;
+        this.startTime = startTime;
+        this.duration = duration;
     }
 
     public Task(int id, String name, Status status, String description, int duration, LocalDateTime startTime,LocalDateTime endTime) {
@@ -56,11 +65,17 @@ public class Task {
         this.description = description;
     }
 
+    public TaskType getType() {
+        return type;
+    }
+
+    public void setType(TaskType type) {
+        this.type = type;
+    }
+
     public String getDescription() {
         return description;
     }
-
-
 
     public String getName() {
         return name;

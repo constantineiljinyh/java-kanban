@@ -1,6 +1,6 @@
 package service;
 
-import service.backed_manager.FileBackedTasksManager;
+import service.HTTP_Manager.HTTPTaskManager;
 import service.history_manager.HistoryManager;
 import service.history_manager.InMemoryHistoryManager;
 
@@ -8,7 +8,7 @@ import service.history_manager.InMemoryHistoryManager;
 public class Managers {
 
     public static TaskManager getDefault() {
-        return new FileBackedTasksManager();
+        return new HTTPTaskManager();
     }
 
     public static HistoryManager getDefaultHistory() {
