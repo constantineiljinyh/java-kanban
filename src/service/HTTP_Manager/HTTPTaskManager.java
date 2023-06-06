@@ -5,7 +5,7 @@ import com.google.gson.GsonBuilder;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonParser;
-import handlers.AbstractHandler;
+import Adapters.Adapter;
 import model.Epic;
 import model.SubTask;
 import model.Task;
@@ -27,25 +27,31 @@ import static model.TaskType.TASK;
 public class HTTPTaskManager extends FileBackedTasksManager {
 
     private static final String URI = "http://localhost:" + KVServer.PORT;
-    final KVTaskClient client;
+    private final KVTaskClient client;
 
     private final Gson gson = new GsonBuilder()
             .serializeNulls()
-            .registerTypeAdapter(LocalDateTime.class, new AbstractHandler.LocalDateTimeAdapter())
-            .registerTypeAdapter(Duration.class, new AbstractHandler.DurationAdapter())
+            .registerTypeAdapter(LocalDateTime.class, new Adapter.LocalDateTimeAdapter())
+            .registerTypeAdapter(Duration.class, new Adapter.DurationAdapter())
             .create();
 
-    public HTTPTaskManager(KVTaskClient client) {
+    public HTTPTaskManager(KVTaskClient client, boolean loadOnConstruct) {
         super(URI);
         this.client = client;
+        if (loadOnConstruct) {
+            load();
+        }
     }
 
-    public HTTPTaskManager() {
+    public HTTPTaskManager(boolean loadOnConstruct) {
         super(URI);
         this.client = new KVTaskClient();
+        if (loadOnConstruct) {
+            load();
+        }
     }
 
-    public void load() {
+   public void load() {
         Map<String, String> loadedTasks = new HashMap<>();
         loadedTasks.put("tasks", client.load("/tasks/task/"));
         loadedTasks.put("epics", client.load("/tasks/epic/"));
@@ -109,7 +115,9 @@ public class HTTPTaskManager extends FileBackedTasksManager {
         }
         id = maxId + 1;
     }
-
+   public void getLoad(){
+        load();
+   }
     @Override
     public void save() {
         client.put("/tasks/task/", gson.toJson(new ArrayList<>(this.getTasks().values())));

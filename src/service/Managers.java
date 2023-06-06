@@ -8,7 +8,7 @@ import service.history_manager.InMemoryHistoryManager;
 public class Managers {
 
     public static TaskManager getDefault() {
-        return new HTTPTaskManager();
+        return new HTTPTaskManager(false);
     }
 
     public static HistoryManager getDefaultHistory() {

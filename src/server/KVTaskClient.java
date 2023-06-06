@@ -8,7 +8,7 @@ import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
 
 public class KVTaskClient {
-    HttpClient client;
+    private final HttpClient client;
     private final String apiToken;
     private final String serverURL = "http://localhost:" + KVServer.PORT;;
 

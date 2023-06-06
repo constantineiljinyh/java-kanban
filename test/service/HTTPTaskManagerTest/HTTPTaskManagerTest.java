@@ -12,15 +12,12 @@ import server.KVServer;
 import service.HTTP_Manager.HTTPTaskManager;
 import service.Managers;
 import service.TaskManagerTest;
-
 import java.io.IOException;
 import java.net.http.HttpClient;
 import java.time.LocalDateTime;
-
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class HTTPTaskManagerTest extends TaskManagerTest<HTTPTaskManager> {
-
     private HttpTaskServer server;
     private KVServer serverKv;
     HttpClient httpClient;
@@ -59,8 +56,8 @@ class HTTPTaskManagerTest extends TaskManagerTest<HTTPTaskManager> {
         final int idSub2 = manager.createSubTask(subTask2);
         SubTask sub2 =  manager.getSubTask(idSub2);
 
-        HTTPTaskManager manager1 = new HTTPTaskManager();
-        manager1.load();
+        HTTPTaskManager manager1 = new HTTPTaskManager(true);
+        manager1.getLoad();
 
         Epic epic2 = manager1.getEpics().get(idEpic);
         assertEquals(task, manager1.getTasks().get(id));

@@ -27,7 +27,7 @@ public class KVServer {
         try {
             System.out.println("\n/load");
             if (!hasAuth(h)) {
-                System.out.println("Запрос неавторизован, у вас нету API_TOKEN.");
+                System.out.println("Запрос не авторизован, у вас нету API_TOKEN.");
                 h.sendResponseHeaders(403, 0);
                 return;
             }
@@ -101,7 +101,7 @@ public class KVServer {
 
     public void start() {
         System.out.println("Запускаем сервер на порту " + PORT);
-        System.out.println("Открой в браузере http://localhost:" + PORT + "/");
+        System.out.println("Открой в браузере http://localhost:" + PORT + "/register");
         System.out.println("API_TOKEN: " + apiToken);
         server.start();
     }

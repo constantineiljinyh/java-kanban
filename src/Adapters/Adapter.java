@@ -1,7 +1,5 @@
-package handlers;
+package Adapters;
 
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonSerializationContext;
@@ -10,9 +8,7 @@ import com.google.gson.TypeAdapter;
 import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonToken;
 import com.google.gson.stream.JsonWriter;
-import com.sun.net.httpserver.HttpExchange;
-import com.sun.net.httpserver.HttpHandler;
-import service.HTTP_Manager.HTTPTaskManager;
+
 import java.io.IOException;
 import java.lang.reflect.Type;
 import java.time.Duration;
@@ -20,35 +16,7 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
 
-abstract public class AbstractHandler implements HttpHandler {
-
-    protected final HTTPTaskManager manager;
-    protected final Gson gson = new GsonBuilder()
-            .serializeNulls()
-            .registerTypeAdapter(LocalDateTime.class, new AbstractHandler.LocalDateTimeAdapter())
-            .registerTypeAdapter(Duration.class, new AbstractHandler.DurationAdapter())
-            .registerTypeAdapter(List.class, new AbstractHandler.CollectionAdapter())
-            .create();
-
-    public AbstractHandler(HTTPTaskManager manager) {
-        this.manager = manager;
-    }
-
-    @Override
-    public void handle(HttpExchange exchange) throws IOException {
-    }
-
-    protected String readText(HttpExchange h) throws IOException {
-        return new String(h.getRequestBody().readAllBytes());
-    }
-
-    protected void sendResponse(HttpExchange h, String text, int statusCode) throws IOException {
-        byte[] resp = text.getBytes();
-        h.getResponseHeaders().add("Content-Type", "application/json");
-        h.sendResponseHeaders(statusCode, resp.length);
-        h.getResponseBody().write(resp);
-    }
-
+public class Adapter {
     // Адаптер для сериализации и десериализации объектов LocalDateTime
     public static class LocalDateTimeAdapter extends TypeAdapter<LocalDateTime> {
         private final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy.MM.dd HH:mm");
@@ -121,7 +89,4 @@ abstract public class AbstractHandler implements HttpHandler {
             return;
         }
         writer.value(value);
-    }
-}
-
-
+    }}

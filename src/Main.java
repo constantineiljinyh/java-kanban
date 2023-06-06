@@ -15,7 +15,7 @@ public class Main {
         KVServer kvServer = new KVServer();
         kvServer.start();
         KVTaskClient client = new KVTaskClient();
-        HTTPTaskManager httpTaskManager = new HTTPTaskManager();
+        HTTPTaskManager httpTaskManager = new HTTPTaskManager(false);
         HttpTaskServer taskServer = new HttpTaskServer(httpTaskManager);
         taskServer.start();
         HistoryManager historyManager = Managers.getDefaultHistory();

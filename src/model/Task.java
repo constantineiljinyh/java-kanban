@@ -30,7 +30,7 @@ public class Task {
     }
 
     public Task(String name, String description, LocalDateTime startTime, int duration) {
-        this.type = TaskType.TASK;
+      //  this.type = TaskType.TASK;
         this.name = name;
         this.description = description;
         this.startTime = startTime;

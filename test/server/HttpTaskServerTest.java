@@ -2,7 +2,7 @@ package server;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-import handlers.AbstractHandler;
+import Adapters.Adapter;
 import model.Epic;
 import model.Status;
 import model.SubTask;
@@ -11,7 +11,6 @@ import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import service.HTTP_Manager.HTTPTaskManager;
-
 import java.io.IOException;
 import java.net.URI;
 import java.net.http.HttpClient;
@@ -20,7 +19,6 @@ import java.net.http.HttpResponse;
 import java.time.Duration;
 import java.time.LocalDateTime;
 import java.util.List;
-
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -30,9 +28,9 @@ class HttpTaskServerTest {
     private HTTPTaskManager manager;
     private final Gson gson = new GsonBuilder()
             .serializeNulls()
-            .registerTypeAdapter(LocalDateTime.class, new AbstractHandler.LocalDateTimeAdapter())
-            .registerTypeAdapter(Duration.class, new AbstractHandler.DurationAdapter())
-            .registerTypeAdapter(List.class, new AbstractHandler.CollectionAdapter())
+            .registerTypeAdapter(LocalDateTime.class, new Adapter.LocalDateTimeAdapter())
+            .registerTypeAdapter(Duration.class, new Adapter.DurationAdapter())
+            .registerTypeAdapter(List.class, new Adapter.CollectionAdapter())
             .create();
     protected Task task1 = new Task("задача", "описание", Status.NEW, 300, LocalDateTime.of(2024, 4, 20, 12, 12));
     protected Task task2 = new Task("задача2", "описание2", Status.NEW, 200, LocalDateTime.of(2025, 4, 20, 13, 12));
@@ -40,7 +38,6 @@ class HttpTaskServerTest {
     private static KVServer kvServer;
     private static HttpTaskServer httpTaskServer;
     private static HttpClient httpClient;
-
     private static final String URIH = "http://localhost:8080/tasks/task/";
     private static final String URIH_EPIC = "http://localhost:8080/tasks/epic/";
     private static final String URIH_SUBTASK = "http://localhost:8080/tasks/subtask/";
@@ -50,7 +47,7 @@ class HttpTaskServerTest {
         kvServer = new KVServer();
         kvServer.start();
         httpClient = HttpClient.newBuilder().build();
-        manager = new HTTPTaskManager();
+        manager = new HTTPTaskManager(false);
 
         httpTaskServer = new HttpTaskServer(manager);
         httpTaskServer.start();
