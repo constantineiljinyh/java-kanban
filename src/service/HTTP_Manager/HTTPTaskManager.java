@@ -1,11 +1,12 @@
 package service.HTTP_Manager;
 
+import adapter.DurationAdapter;
+import adapter.LocalDateTimeAdapter;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonParser;
-import Adapters.Adapter;
 import model.Epic;
 import model.SubTask;
 import model.Task;
@@ -13,13 +14,11 @@ import model.TaskType;
 import server.KVServer;
 import server.KVTaskClient;
 import service.backed_manager.FileBackedTasksManager;
-
 import java.time.Duration;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
-
 import static model.TaskType.EPIC;
 import static model.TaskType.SUBTASK;
 import static model.TaskType.TASK;
@@ -31,8 +30,8 @@ public class HTTPTaskManager extends FileBackedTasksManager {
 
     private final Gson gson = new GsonBuilder()
             .serializeNulls()
-            .registerTypeAdapter(LocalDateTime.class, new Adapter.LocalDateTimeAdapter())
-            .registerTypeAdapter(Duration.class, new Adapter.DurationAdapter())
+            .registerTypeAdapter(LocalDateTime.class, new LocalDateTimeAdapter())
+            .registerTypeAdapter(Duration.class, new DurationAdapter())
             .create();
 
     public HTTPTaskManager(KVTaskClient client, boolean loadOnConstruct) {

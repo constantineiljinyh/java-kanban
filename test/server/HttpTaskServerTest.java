@@ -1,8 +1,10 @@
 package server;
 
+import adapter.CollectionAdapter;
+import adapter.DurationAdapter;
+import adapter.LocalDateTimeAdapter;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-import Adapters.Adapter;
 import model.Epic;
 import model.Status;
 import model.SubTask;
@@ -28,9 +30,9 @@ class HttpTaskServerTest {
     private HTTPTaskManager manager;
     private final Gson gson = new GsonBuilder()
             .serializeNulls()
-            .registerTypeAdapter(LocalDateTime.class, new Adapter.LocalDateTimeAdapter())
-            .registerTypeAdapter(Duration.class, new Adapter.DurationAdapter())
-            .registerTypeAdapter(List.class, new Adapter.CollectionAdapter())
+            .registerTypeAdapter(LocalDateTime.class, new LocalDateTimeAdapter())
+            .registerTypeAdapter(Duration.class, new DurationAdapter())
+            .registerTypeAdapter(List.class, new CollectionAdapter())
             .create();
     protected Task task1 = new Task("задача", "описание", Status.NEW, 300, LocalDateTime.of(2024, 4, 20, 12, 12));
     protected Task task2 = new Task("задача2", "описание2", Status.NEW, 200, LocalDateTime.of(2025, 4, 20, 13, 12));

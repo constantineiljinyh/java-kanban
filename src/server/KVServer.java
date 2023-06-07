@@ -8,7 +8,6 @@ import java.util.HashMap;
 import java.util.Map;
 import static java.nio.charset.StandardCharsets.UTF_8;
 
-
 public class KVServer {
     public static final int PORT = 8077;
     private final String apiToken;

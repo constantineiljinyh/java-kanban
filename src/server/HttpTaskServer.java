@@ -1,11 +1,13 @@
 package server;
 
+import adapter.CollectionAdapter;
+import adapter.DurationAdapter;
+import adapter.LocalDateTimeAdapter;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.sun.net.httpserver.HttpExchange;
 import com.sun.net.httpserver.HttpHandler;
 import com.sun.net.httpserver.HttpServer;
-import Adapters.Adapter;
 import model.Epic;
 import model.HttpMethod;
 import model.SubTask;
@@ -23,9 +25,9 @@ public class HttpTaskServer {
     private static final int PORT = 8080;
     protected final Gson gson = new GsonBuilder()
             .serializeNulls()
-            .registerTypeAdapter(LocalDateTime.class, new Adapter.LocalDateTimeAdapter())
-            .registerTypeAdapter(Duration.class, new Adapter.DurationAdapter())
-            .registerTypeAdapter(List.class, new Adapter.CollectionAdapter())
+            .registerTypeAdapter(LocalDateTime.class, new LocalDateTimeAdapter())
+            .registerTypeAdapter(Duration.class, new DurationAdapter())
+            .registerTypeAdapter(List.class, new CollectionAdapter())
             .create();
 
     public HttpTaskServer(HTTPTaskManager manager) throws IOException {
